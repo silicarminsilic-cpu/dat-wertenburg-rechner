@@ -217,8 +217,8 @@ ol.tl li b{display:block;font-size:13px;color:var(--muted);font-weight:600;margi
 .next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 
 [hidden]{display:none!important}
-.vtxt{background:var(--soft);border-radius:18px;padding:18px 20px;font-size:14px;line-height:1.6;max-height:300px;overflow:auto}
-.vtxt p{margin:8px 0}.vtxt ol{margin:8px 0;padding-left:20px}.vtxt li{margin:4px 0}.vtxt b{font:500 17px/1.3 var(--serif);display:block}
+.vtxt{background:var(--soft);border-radius:18px;padding:18px 20px;font-size:14px;line-height:1.6;max-height:380px;overflow:auto}
+.vtxt p{margin:8px 0}.vtxt ol{margin:8px 0;padding-left:20px}.vtxt li{margin:4px 0}.vtxt b{font:500 17px/1.3 var(--serif);display:block}.vtxt b.vh{font:600 14px/1.5 var(--sans);display:inline}.vtxt .sub{color:var(--muted);font-size:13px}.vtxt ul{margin:8px 0;padding-left:20px}.vtxt li{margin:4px 0}
 .vbar{margin:18px 0 10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;gap:2px}
 .seg button{border:none;background:none;color:var(--ink);font:500 14px var(--sans);padding:7px 16px;border-radius:999px;cursor:pointer;transition:background .15s}
@@ -463,6 +463,7 @@ body.sh-open{overflow:hidden}
   main{padding-bottom:90px}
 }
 @media (max-width:380px){.dock .d2{display:none}}
+@media (max-width:700px){.vtab{min-width:0!important;font-size:13px}.vtab th:first-child,.vtab td:first-child{width:80px;max-width:80px;font-size:12px;white-space:normal;padding-left:0;line-height:1.35}.vtab th,.vtab td{padding:9px 6px;white-space:nowrap}.vtab td:first-child{white-space:normal}.vtab .vname{min-width:64px;width:72px;padding:0 4px;font-size:13px}.vtab .va{flex-direction:column;align-items:stretch;gap:4px}.vtab .va button{padding:4px 4px;font-size:12px}.vscroll{display:block}}
 </style>
 </head>
 <body>
@@ -682,6 +683,11 @@ body.sh-open{overflow:hidden}
      <div class="fld"><label for="vs">Straße und Hausnummer *</label><input id="vs" type="text" autocomplete="off"></div>
      <div class="fld"><label for="vo">PLZ und Ort *</label><input id="vo" type="text" autocomplete="off"></div>
     </div>
+    <details style="margin-top:18px"><summary style="cursor:pointer;font-weight:600">2. Auftraggeber (optional)</summary><div class="fields" style="margin-top:12px">
+     <div class="fld"><label for="vn2">Name, Vorname</label><input id="vn2" type="text" autocomplete="off"></div>
+     <div class="fld"><label for="vg2">Geburtsdatum</label><input id="vg2" type="date"></div>
+     <div class="fld"><label for="vs2">Straße</label><input id="vs2" type="text" autocomplete="off"></div>
+     <div class="fld"><label for="vo2">PLZ, Wohnort</label><input id="vo2" type="text" autocomplete="off"></div></div></details>
     <div class="fld" style="margin-top:18px"><label for="vt">Bestehende Verträge und Gesellschaften</label><textarea id="vt" rows="3" placeholder="z. B. Riester-Vertrag, Gesellschaft, Vertragsnummer"></textarea></div>
     <div class="fld" style="margin-top:18px"><label for="vl">Ort der Unterschrift</label><input id="vl" type="text" autocomplete="off"></div>
    </div>
@@ -1253,19 +1259,30 @@ $('cp').addEventListener('click',function(){
 var BR=BRAND.broker,smode='draw',drawn=false,pen=false,cv=$('sg'),cx=cv.getContext('2d');
 var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 function vtext(){
-  var n=$('vn').value.trim()||'[Name]',a=[$('vs').value.trim(),$('vo').value.trim()].filter(Boolean).join(', ')||'[Anschrift]';
-  var g=$('vg').value?new Date($('vg').value).toLocaleDateString('de-DE'):'[Geburtsdatum]';
+  var A=function(n,g,s,o){n=n.trim();s=[s.trim(),o.trim()].filter(Boolean).join(', ');return{n:n,g:g?new Date(g).toLocaleDateString('de-DE'):'',a:s}};
+  var a1=A($('vn').value,$('vg').value,$('vs').value,$('vo').value),a2=A($('vn2').value,$('vg2').value,$('vs2').value,$('vo2').value);
   var ort=$('vl').value.trim()||'[Ort]',d=new Date().toLocaleDateString('de-DE');
-  $('vtxt').innerHTML='<b>Maklervollmacht und Maklerauftrag</b>'
-   +'<p>Ich, '+esc(n)+', '+esc(a)+', geboren am '+esc(g)+' (Vollmachtgeber), bevollmächtige und beauftrage die '+esc(BR.n)+', '+esc(BR.a)+', '+esc(BR.reg)+' (Makler), mich in Fragen meiner bestehenden und künftigen Versicherungs- und Altersvorsorgeverträge zu betreuen. Der Makler ist insbesondere berechtigt:</p>'
-   +'<ol><li>bei Versicherern, Produktgebern und Zulagenstellen Auskünfte zu meinen Verträgen einzuholen und Vertragsunterlagen anzufordern,</li>'
-   +'<li>meine Verträge zu verwalten und mit mir zu überprüfen, einschließlich Beitragsanpassungen und Änderungen von Vertragsdaten, soweit ich diese zuvor mündlich oder in Textform angewiesen habe,</li>'
-   +'<li>Anträge zur staatlichen Altersvorsorgeförderung für mich vorzubereiten und einzureichen,</li>'
-   +'<li>den Schriftverkehr zu meinen Verträgen entgegenzunehmen.</li></ol>'
-   +'<p>Kündigungen, Widerrufe und Vertragsübertragungen führt der Makler nur nach meiner gesonderten Zustimmung aus.</p>'
-   +'<p>Ich willige ein, dass die genannten Stellen dem Makler die zur Vertragsbetreuung erforderlichen Daten übermitteln und der Makler diese Daten zu diesem Zweck verarbeitet.</p>'
-   +'<p>Die Vollmacht gilt bis auf Widerruf. Ich kann sie jederzeit in Textform mit Wirkung für die Zukunft widerrufen.</p>'
-   +'<p>'+esc(ort)+', den '+d+'</p>';
+  var p=function(x,n){return '<p><b class="vh">'+n+'</b> '+esc(x.n||'[Name, Vorname]')+', geboren am '+esc(x.g||'[Geburtsdatum]')+', '+esc(x.a||'[Anschrift]')+'</p>'};
+  $('vtxt').innerHTML='<b>Maklervollmacht (Versicherungsvermittlung)</b><p class="sub">Stand 01/2026</p>'
+   +p(a1,'1. Auftraggeber')+(a2.n?p(a2,'2. Auftraggeber'):'')
+   +'<p>im Folgenden Vollmachtgeber genannt</p><p>bevollmächtigt hierdurch</p>'
+   +'<p><b class="vh">'+esc(BR.n)+'</b><br>vertreten durch den Geschäftsführer Markus Brugger<br>Möhlstraße 19<br>81675 München</p>'
+   +'<p>im Folgenden Makler genannt, ihn in seinen Versicherungsangelegenheiten wie folgt zu vertreten bzw. für ihn tätig zu werden:</p>'
+   +'<p><b class="vh">Vollmacht</b></p>'
+   +'<p>Die Vertretungsbefugnisse des Maklers gegenüber den Versicherungsunternehmen und sonstigen Produktgebern (z.B. Vermögensverwaltern, Wertpapierinstituten, Banken) beinhalten insbesondere:</p>'
+   +'<ul><li>die Führung und Korrespondenz mit den in Frage kommenden bzw. bereits mit dem Vollmachtgeber in Verbindung stehenden Kreditinstituten und Versicherungen, insbesondere auch die Kündigung bestehender Verträge.</li>'
+   +'<li>der Empfang/ die Entgegennahme von Konditions- und Vertragsangeboten, sowie der sonstigen Korrespondenz zwischen den Beteiligten</li>'
+   +'<li>die Einholung und Besprechung von Einkommensunterlagen, BWAs, Bilanzen etc. mit den steuerlichen, wirtschaftlichen und rechtlichen Beratern</li>'
+   +'<li>die Einholung von Auskünften bei Sozialversicherungsträgern und berufsständischen Versorgungswerken.</li></ul>'
+   +'<p>Die Kreditinstitute, Verwaltungen sowie die Berater werden der Bevollmächtigten gegenüber ausdrücklich vom Bankgeheimnis bzw. von ihrer Schweigepflicht befreit.</p>'
+   +'<ul><li>Abgabe und Entgegennahme sämtlicher Willenserklärungen zum Zweck des Abschlusses, der Änderung sowie zur Beendigung von Versicherungsverträgen</li>'
+   +'<li>Abgabe von Willenserklärungen (z. B. Anzeigen zur Erfüllung von Obliegenheiten etc.) gegenüber den Versicherern und sonstigen Dritten</li>'
+   +'<li>Geltendmachung von Leistungsansprüchen im Rahmen der Schadenbearbeitung für die Vollmachtgeberin gegenüber den Versicherern</li>'
+   +'<li>Sonstige Mitwirkung bei der Schadensregulierung</li>'
+   +'<li>Vertretung des Vollmachtgebers bei der Korrespondenz mit Versicherern sowie Behörden durch den Makler</li>'
+   +'<li>Berechtigung, bei der Erfüllung seiner Aufgaben Untervollmachten an Finanzdienstleister, namentlich Maklerpools, zu erteilen</li></ul>'
+   +'<p>'+esc(ort)+', '+d+'</p>'
+   +'<p class="sub">Unterschrift Auftraggeber 1 (unten)'+(a2.n?'. Unterschrift Auftraggeber 2: wird im Gespräch ergänzt.':'')+'</p>';
 }
 function sizeCv(){var r=cv.getBoundingClientRect();if(!r.width)return;var d=window.devicePixelRatio||1;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);
   cx.setTransform(d,0,0,d,0,0);cx.lineWidth=2.4;cx.lineCap='round';cx.lineJoin='round';cx.strokeStyle='#0f1f33';drawn=false}
@@ -1292,10 +1309,10 @@ function vmLines(){
   if(!vmComplete())return['MAKLERVOLLMACHT','Status: nicht erteilt',''];
   var a=[$('vs').value.trim(),$('vo').value.trim()].join(', ');
   return['MAKLERVOLLMACHT','Status: erteilt ('+(smode==='draw'?'gezeichnete':'getippte')+' Unterschrift, '+new Date().toLocaleString('de-DE')+')','Bevollmächtigter: '+BR.n,
-   'Vollmachtgeber: '+$('vn').value.trim(),'Geburtsdatum: '+new Date($('vg').value).toLocaleDateString('de-DE'),'Anschrift: '+a,
+   'Vollmachtgeber: '+$('vn').value.trim(),'Geburtsdatum: '+new Date($('vg').value).toLocaleDateString('de-DE'),'Anschrift: '+a,'2. Auftraggeber: '+($('vn2').value.trim()?$('vn2').value.trim()+($('vg2').value?', geb. '+new Date($('vg2').value).toLocaleDateString('de-DE'):'')+', '+[$('vs2').value.trim(),$('vo2').value.trim()].filter(Boolean).join(', ')+' (Unterschrift im Gespräch einzuholen)':'–'),
    'Bestehende Verträge und Gesellschaften: '+($('vt').value.trim()||'–'),'Ort, Datum: '+($('vl').value.trim()||'–')+', '+new Date().toLocaleDateString('de-DE'),
    'Bestätigung des Kunden per E-Mail-Code: durch den Berater einzuholen',''];}
-['vn','vg','vs','vo','vl'].forEach(function(i){$(i).addEventListener('input',function(){vtext();vstate()})});
+['vn','vg','vs','vo','vl','vn2','vg2','vs2','vo2'].forEach(function(i){$(i).addEventListener('input',function(){vtext();vstate()})});
 $('vm').addEventListener('change',vstate);
 $('vn').addEventListener('input',function(){if($('nm'))$('nm').value=$('vn').value;$('kn').value=$('vn').value});
 $('kn').addEventListener('input',function(){$('vn').value=$('kn').value;if($('nm'))$('nm').value=$('kn').value;vtext();vstate()});
