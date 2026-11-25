@@ -233,7 +233,8 @@ ol.tl li b{display:block;font-size:13px;color:var(--muted);font-weight:600;margi
 .vw{display:inline-flex;gap:2px;background:rgba(255,255,255,.14);border-radius:999px;padding:2px}
 .vw button{border:none;background:none;color:inherit;font:500 12.5px var(--sans);padding:4px 12px;border-radius:999px;cursor:pointer;opacity:.85}
 .vw button.on{background:#fff;color:var(--brand);opacity:1}
-.kunde .ao{display:none!important}
+.kunde .ao,.kunde .kx{display:none!important}
+body.kunde #st2{display:none!important}#sBox{margin-top:26px}
 body:not(.kunde) .ko{display:none!important}
 body.kunde #st6.koff{display:none!important}
 .scn3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -479,7 +480,7 @@ body.sh-open{overflow:hidden}
 <header class="hd"><div class="hd-in">
   <a class="logo" href="#top"><span class="mk" role="img" aria-label="DAT Logo"></span>
     <span><b id="bn">DAT Förderrechner</b><small><span id="bp">Altersvorsorgedepot</span><span class="pill-s">2027</span></small></span></a>
-  <nav class="mn" aria-label="Bereiche"><a href="#st1">Person</a><a href="#st2">Sparbetrag</a><a href="#st3">Ergebnis</a><a href="#st4">Kosten</a><a class="ko" href="#st8">Beratung</a></nav>
+  <nav class="mn" aria-label="Bereiche"><a href="#st1">Person</a><a class="kx" href="#st2">Sparbetrag</a><a class="ko" href="#st2k">Förderung</a><a href="#st3">Ergebnis</a><a class="kx" href="#st4">Kosten</a><a class="ko" href="#st8">Beratung</a></nav>
   <a class="btn sm ko" href="#st8" style="margin-left:auto">Beratung anfordern</a><span class="tag" id="bb" hidden>Förderrechner</span>
   
 </div></header>
@@ -516,9 +517,10 @@ body.sh-open{overflow:hidden}
 
 <nav class="steps" aria-label="Ablauf"><ol>
   <li><a href="#st1" data-s="st1"><b>1</b><span>Person</span></a></li>
-  <li><a href="#st2" data-s="st2"><b>2</b><span>Sparbetrag</span></a></li>
+  <li class="kx"><a href="#st2" data-s="st2"><b>2</b><span>Sparbetrag</span></a></li>
+  <li class="ko"><a href="#st2k" data-s="st2k"><b>2</b><span>Förderung</span></a></li>
   <li><a href="#st3" data-s="st3"><b>3</b><span>Ergebnis</span></a></li>
-  <li><a href="#st4" data-s="st4"><b>4</b><span>Kosten</span></a></li>
+  <li class="kx"><a href="#st4" data-s="st4"><b>4</b><span>Kosten</span></a></li>
   
   
   <li class="ko"><a href="#st8" data-s="st8"><b>6</b><span>Beratung</span></a></li>
@@ -527,21 +529,21 @@ body.sh-open{overflow:hidden}
 
 <main>
  <section class="card rv" id="st1" aria-labelledby="h1">
-  <header><b>1</b><h2 id="h1">Person</h2></header>
+  <header><b>1</b><h2 id="h1" data-k="Ihre Angaben">Person</h2></header>
   <div class="fields">
    <div class="fld"><label for="by">Geburtsjahr</label><input id="by" type="number" inputmode="numeric" value="1990" min="1950" max="2010"></div>
-   <div class="fld"><label for="ra">Auszahlbeginn mit Alter</label><input id="ra" type="number" inputmode="numeric" value="67" min="65" max="70"></div>
+   <div class="fld kx"><label for="ra">Auszahlbeginn mit Alter</label><input id="ra" type="number" inputmode="numeric" value="67" min="65" max="70"></div>
    <div class="fld"><label for="job">Berufliche Situation</label><select id="job"><option value="ang">Angestellt / Ausbildung (rentenversichert)</option><option value="bea">Beamtet / Richter / Soldat</option><option value="sel">Selbstständig / freiberuflich</option><option value="min">Minijob</option><option value="ne">Nicht erwerbstätig</option></select></div>
-   <div class="fld"><label for="fst">Förderstatus</label><select id="fst"><option value="u">Unmittelbar zulageberechtigt</option><option value="m">Mittelbar über Ehepartner (höchstens 175 €)</option><option value="n">Nicht zulageberechtigt</option></select></div>
-   <div class="fld"><label for="fs">Familienstand</label><select id="fs"><option>Keine Angabe</option><option>Ledig</option><option>Verheiratet / eingetragene Lebenspartnerschaft</option></select></div>
-   <div class="fld"><label for="st">Grenzsteuersatz (für Günstigerprüfung)</label><select id="st"><option value="0">Keine Angabe</option><option value="14">ca. 14 %</option><option value="24">ca. 24 %</option><option value="30">ca. 30 %</option><option value="35">ca. 35 %</option><option value="42">ca. 42 %</option><option value="45">ca. 45 %</option></select></div>
-   <div class="fld"><label for="ri">Bestehender Riester-Vertrag</label><select id="ri"><option>Keine Angabe</option><option>Nein</option><option>Ja</option></select></div>
+   <div class="fld kx"><label for="fst">Förderstatus</label><select id="fst"><option value="u">Unmittelbar zulageberechtigt</option><option value="m">Mittelbar über Ehepartner (höchstens 175 €)</option><option value="n">Nicht zulageberechtigt</option></select></div>
+   <div class="fld kx"><label for="fs">Familienstand</label><select id="fs"><option>Keine Angabe</option><option>Ledig</option><option>Verheiratet / eingetragene Lebenspartnerschaft</option></select></div>
+   <div class="fld"><label for="st">Grenzsteuersatz (für Günstigerprüfung)</label><select id="st"><option value="0">Keine Angabe</option><option value="14">ca. 14 %</option><option value="24">ca. 24 %</option><option value="30" selected>ca. 30 %</option><option value="35">ca. 35 %</option><option value="42">ca. 42 %</option><option value="45">ca. 45 %</option></select></div>
+   <div class="fld kx"><label for="ri">Bestehender Riester-Vertrag</label><select id="ri"><option>Keine Angabe</option><option>Nein</option><option>Ja</option></select></div>
   </div>
-  <div class="fields" id="riBox" hidden style="margin-top:18px">
+  <div class="fields kx" id="riBox" hidden style="margin-top:18px">
    <div class="fld"><label for="rig">Riester: Gesellschaft *</label><input id="rig" type="text" autocomplete="off" placeholder="z. B. Allianz, DWS, Union Investment"></div>
    <div class="fld"><label for="rin">Riester: Vertragsnummer *</label><input id="rin" type="text" autocomplete="off" placeholder="laut Vertrag oder Jahresmitteilung"></div>
   </div>
-  <div class="hint" id="h-ri"></div>
+  <div class="hint kx" id="h-ri"></div>
   <div class="hint" id="h-job"></div>
   <h3>Kinder</h3>
   <div class="fields">
@@ -562,11 +564,11 @@ body.sh-open{overflow:hidden}
   <div class="pre" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button type="button" class="btn alt sm" data-pm="10">Mindestbeitrag 10 €</button><button type="button" class="btn alt sm" data-pm="30">Höchste Quote 30 €</button><button type="button" class="btn alt sm" data-pm="150">Volle Förderung 150 €</button></div>
   <input id="bs" type="range" min="0" max="150" step="5" value="150" aria-label="Eigenbeitrag pro Monat" style="width:100%">
   <div class="hint" id="bmsg"></div>
-  <details open>
+  <details open class="kx">
    <summary>Erweiterte Annahmen</summary>
    <div class="fields three">
     <div class="fld"><label for="sb">Sparbeginn</label><input id="sb" type="number" inputmode="numeric" value="2027" min="2027" max="2060"></div>
-    <div class="fld"><label for="rd">Rendite p. a.</label><div class="unit"><input id="rd" type="number" step="0.1" value="5"><i>%</i></div></div>
+    <div class="fld"><label for="rd">Rendite p. a.</label><div class="unit"><input id="rd" type="number" step="0.05" value="5.95"><i>%</i></div></div>
     <div class="fld"><label for="ko">Kosten p. a. (fest)</label><div class="unit"><input id="ko" type="number" step="0.01" value="0.95" readonly><i>%</i></div></div>
     <div class="fld"><label for="dy">Geplante Beitragserhöhung p. a.</label><div class="unit"><input id="dy" type="number" step="0.1" value="0" min="0" max="10"><i>%</i></div></div>
     <div class="fld"><label for="in">Inflation p. a.</label><div class="unit"><input id="in" type="number" step="0.1" value="2"><i>%</i></div></div>
@@ -577,8 +579,13 @@ body.sh-open{overflow:hidden}
   </details>
  </section>
 
+ <section class="card rv ko" id="st2k" aria-labelledby="h2k">
+  <header><b>2</b><h2 id="h2k">Wie hoch ist Ihre Förderung (Zulage)?</h2></header>
+  <div id="twoBox"></div>
+ </section>
+
  <section class="card rv" id="st3" aria-labelledby="h3">
-  <header><b>3</b><h2 id="h3">Ergebnis</h2><button type="button" class="btn alt sm" id="pbtn" style="margin-left:auto">Ergebnis als PDF</button></header>
+  <header><b>3</b><h2 id="h3" data-k="Was kann bei 5 % Anlagerendite nach Kosten herauskommen?">Ergebnis</h2><button type="button" class="btn alt sm kx" id="pbtn" style="margin-left:auto">Ergebnis als PDF</button></header>
   <div class="tiles">
    <div class="tile"><span class="lbl">Eigenbeiträge</span><b id="t-eig">–</b></div>
    <div class="tile"><span class="lbl">Zulagen</span><b id="t-zul">–</b></div>
@@ -597,14 +604,14 @@ body.sh-open{overflow:hidden}
    <div class="tip" id="tip"></div>
   </div>
   <div class="lg2"><span><i style="background:var(--c1)"></i>Eigenbeiträge</span><span><i style="background:var(--c2)"></i>Zulagen</span><span><i style="background:var(--c3)"></i>Erträge nach Kosten</span></div>
-  <h3>Szenarien</h3>
-  <div class="scn3" id="scen"></div>
-  <div class="hint" style="margin-top:10px">Rechenbeispiele mit der Rendite aus den Annahmen und je 2 Prozentpunkten darüber und darunter. Keine Prognose, keine Garantie.</div>
-  <h3>Varianten im Vergleich</h3>
-  <div class="send-row" style="margin:0 0 14px"><button type="button" class="btn alt sm" id="vsave">Aktuelle Eingaben als Variante speichern</button><span class="hint" id="vhint">Bis zu drei Varianten, zum Beispiel mit und ohne Einmalzahlung.</span></div>
-  <div class="vscroll">Tabelle seitlich wischen, um alle Varianten zu sehen.</div>
-  <div class="vwrap"><table class="vtab" id="vtab"></table></div>
-  <div class="two">
+  <h3 class="kx">Szenarien</h3>
+  <div class="scn3 kx" id="scen"></div>
+  <div class="hint kx" style="margin-top:10px">Rechenbeispiele mit der Rendite nach Kosten aus den Annahmen und je 2 Prozentpunkten darüber und darunter. Keine Prognose, keine Garantie.</div>
+  <h3 class="kx">Varianten im Vergleich</h3>
+  <div class="send-row kx" style="margin:0 0 14px"><button type="button" class="btn alt sm" id="vsave">Aktuelle Eingaben als Variante speichern</button><span class="hint" id="vhint">Bis zu drei Varianten, zum Beispiel mit und ohne Einmalzahlung.</span></div>
+  <div class="vscroll kx">Tabelle seitlich wischen, um alle Varianten zu sehen.</div>
+  <div class="vwrap kx"><table class="vtab" id="vtab"></table></div>
+  <span id="twoMark"></span><div class="two" id="twoEl">
    <div><h3 style="margin-top:0" id="z-h">Zulagen im ersten Beitragsjahr</h3>
     <table><tbody>
      <tr><td>Grundzulage</td><td id="z1">–</td></tr>
@@ -613,20 +620,20 @@ body.sh-open{overflow:hidden}
      <tr><td>Summe</td><td id="z4">–</td></tr>
      <tr><td>Günstigerprüfung: Steuervorteil über der Zulage</td><td id="z5">–</td></tr>
     </tbody></table>
-    <div class="hint" id="z-tax" style="margin-top:10px"></div></div>
+    <div class="hint" id="z-tax" style="margin-top:10px"></div><div class="hint ko" style="margin-top:10px"><b>Hinweis:</b> Die Förderung für die Kinder entfällt, sobald die Kinder nicht mehr kindergeldberechtigt sind.</div></div>
    <div><h3 style="margin-top:0">Hinweise</h3><ul class="opt" id="opt"></ul><div class="hint" id="zi-msg" style="margin-top:12px"></div></div>
   </div>
-  <h3>Auszahlphase</h3>
-  <div class="tiles" style="margin-bottom:8px">
+  <h3 class="kx">Auszahlphase</h3>
+  <div class="tiles kx" style="margin-bottom:8px">
    <div class="tile"><span class="lbl">Kapital zu Rentenbeginn</span><b id="a-k">–</b></div>
    <div class="tile"><span class="lbl">Teilauszahlung bis 30 %</span><b id="a-30">–</b></div>
    <div class="tile"><span class="lbl">Monatlich bis 85 ohne Teilauszahlung</span><b id="a-m">–</b></div>
    <div class="tile"><span class="lbl">Monatlich bis 85 nach 30 % Entnahme</span><b id="a-m2">–</b></div>
   </div>
-  <div class="hint" id="a-h"></div>
+  <div class="hint kx" id="a-h"></div>
  </section>
 
- <section class="card rv" id="st4" aria-labelledby="h4">
+ <section class="card rv kx" id="st4" aria-labelledby="h4">
   <header><b>4</b><h2 id="h4">Kosten und Bestandsvertrag</h2></header>
   <div class="scn">
    <div class="sc"><h3>Vergleich 1</h3><label class="lbl2" for="kA">Kosten p. a.</label><div class="unit"><input id="kA" type="number" step="0.05" value="1.5"><i>%</i></div><div class="v" id="vA">–</div><div class="track"><span id="bA"></span></div><div class="dl" id="dA">–</div></div>
@@ -949,9 +956,9 @@ function draw(){
   $('mini').innerHTML=gl+'<path d="'+areaPath(t2,t3,xm,ym)+'" fill="var(--c3)"/><path d="'+areaPath(t1,t2,xm,ym)+'" fill="var(--c2)"/><path d="'+areaPath(z0,t1,xm,ym)+'" fill="var(--c1)"/>'+mk;
   $('o-sub').textContent=hovI===null?'Rechnerischer Endwert nach '+yrs+' Jahren ('+sb+' bis '+(sb+yrs)+')':'Rechnerischer Stand im Jahr '+Math.round(sb+hovI/N*yrs)+' (nach '+Math.round(hovI/N*yrs)+' Jahren)';
   $('ax2').textContent='nach '+yrs+' Jahren';
-  $('o-ass').textContent='Annahmen: '+pf.format(t.p.rd)+' % Rendite, '+pf2.format(t.p.ko)+' % Kosten, '+pf.format(t.p.inf)+' % Inflation. Keine Garantie.';
-  var zi2=hv===null?0:Math.min(yy-1,Math.round(hv/N*yy)),zg=t.s.GY[zi2]||0,zk=t.s.KY[zi2]||0,zb=t.s.BY[zi2]||0;
-  $('z-h').textContent=hv===null?'Zulagen im ersten Beitragsjahr':'Zulagen im Jahr '+(y0+zi2);
+  $('o-ass').textContent='Annahmen: '+pf.format(t.p.rd-t.p.ko)+' % Rendite nach Kosten ('+pf2.format(t.p.ko)+' % Kosten), '+pf.format(t.p.inf)+' % Inflation. Keine Garantie.';
+  var hk=document.body.classList.contains('kunde'),zi2=(hv===null||hk)?0:Math.min(yy-1,Math.round(hv/N*yy)),zg=t.s.GY[zi2]||0,zk=t.s.KY[zi2]||0,zb=t.s.BY[zi2]||0;
+  $('z-h').textContent=(hv===null||hk)?'Zulagen im ersten Beitragsjahr':'Zulagen im Jahr '+(y0+zi2);
   $('z1').textContent=eur(zg);$('z2').textContent=eur(zk);$('z3').textContent=eur(zb);$('z4').textContent=eur(zg+zk+zb);
 }
 
@@ -1095,7 +1102,7 @@ function scenarios(p){
   lastScen=def.map(function(d){var rd=p.rd+d[1],r=sim(p,undefined,0,rd);return{n:d[0],rd:rd,end:r.end,kp:r.kp,b:d[1]===0}});
   var box=$('scen');
   if(box.children.length!==3)box.innerHTML=lastScen.map(function(x){return'<div class="sn'+(x.b?' b':'')+'"><span class="r"></span><b></b><small>Kaufkraft heute: <span></span></small></div>'}).join('');
-  lastScen.forEach(function(x,i){var c=box.children[i];c.querySelector('.r').textContent=x.n+', '+pf.format(x.rd)+' % Rendite';animNum(c.querySelector('b'),x.end);animNum(c.querySelector('small span'),x.kp)});
+  lastScen.forEach(function(x,i){var c=box.children[i];c.querySelector('.r').textContent=x.n+', '+pf.format(x.rd-0.95)+' % nach Kosten';animNum(c.querySelector('b'),x.end);animNum(c.querySelector('small span'),x.kp)});
 }
 function bestand(p){
   var w=parseFloat($('bvw').value),k=parseFloat($('bvk').value),r=parseFloat($('bvr').value),x=parseFloat($('bvx').value)||0,box=$('bvt'),m=$('bvm');
@@ -1183,7 +1190,7 @@ if(!reduce&&window.matchMedia('(hover:hover)').matches){
 if('IntersectionObserver' in window){
   var links=document.querySelectorAll('.steps a');
   var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('data-s')===e.target.id)})}})},{rootMargin:'-35% 0px -55% 0px'});
-  ['st1','st2','st3','st4','st6','st8'].forEach(function(i){spy.observe($(i))});
+  ['st1','st2','st2k','st3','st4','st6','st8'].forEach(function(i){spy.observe($(i))});
   var dock=$('dock'),heroOut=false,sendIn=false;
   var dk=function(){var on=heroOut&&!sendIn;dock.classList.toggle('on',on);dock.setAttribute('aria-hidden',on?'false':'true');dock.querySelectorAll('button').forEach(function(a){a.tabIndex=on?0:-1})};
   new IntersectionObserver(function(es){heroOut=!es[0].isIntersecting;dk()},{threshold:0}).observe(document.querySelector('.hero'));
@@ -1430,11 +1437,11 @@ function buildProto(){
   h+='<h2>Eingaben</h2>'+tb([['Geburtsjahr',p.by],['Renteneintrittsalter',p.ra],['Kinder mit Kindergeld',p.kids],['Sparbeginn',p.sb],
      ['Eigenbeitrag',eur(p.B)+' im Jahr ('+eur(p.B/12)+' im Monat)'],['Beitragsdynamik',pf.format(p.dy)+' % p. a.'],['Einmalzahlung',eur(p.lu)]])
    +'<h2>Förderstatus</h2>'+tb([['Berufliche Situation',sel('job')],['Förderstatus',sel('fst')],['Kinder (Jahrgänge)',p.kids?p.ky.join(', ')+', Kindergeld bis '+p.kga:'keine'],['Grenzsteuersatz',sel('st')],['Bestehender Riester-Vertrag',$('ri').value+riTxt()]])
-   +'<h2>Annahmen</h2>'+tb([['Rendite',pf.format(p.rd)+' % p. a.'],['Kosten',pf2.format(p.ko)+' % p. a.'],['Inflation (nur Kaufkraft)',pf.format(p.inf)+' % p. a.']])
+   +'<h2>Annahmen</h2>'+tb([['Rendite nach Kosten',pf.format(p.rd-p.ko)+' % p. a.'],['Kosten (in der Rendite enthalten)',pf2.format(p.ko)+' % p. a.'],['Inflation (nur Kaufkraft)',pf.format(p.inf)+' % p. a.']])
    +'<h2>Ergebnis</h2>'+tb([['Laufzeit',s.years+' Jahre'],['Eigenbeiträge',eur(s.eig)],['Zulagen',eur(s.zul)],['Förderquote',pf.format(s.q)+' %'],['Rechnerischer Endwert',eur(s.end)],['Kaufkraft in heutigen Euro',eur(s.kp)],
      ['Zulagen im ersten Jahr',eur(f.g+f.k+f.bo)+' (Grund '+eur(f.g)+', Kinder '+eur(f.k)+', Berufseinsteiger '+eur(f.bo)+')']])
    +'<h2>Günstigerprüfung und Auszahlphase</h2>'+tb([['Zusätzlicher Steuervorteil (geschätzt)',p.tax?eur(f.tax)+' im ersten Jahr, '+eur(s.tax)+' gesamt':'nicht berechnet'],['Kapital zu Rentenbeginn (Alter '+p.ra+')',eur(po.K)],['Teilauszahlung bis 30 %',eur(po.k30)],['Auszahlplan bis 85, monatlich',eur(po.m)+' · nach 30 % Entnahme '+eur(po.m2)]])
-   +'<h2>Szenarien</h2>'+tb(lastScen.map(function(x){return[x.n+', '+pf.format(x.rd)+' % Rendite','Endwert '+eur(x.end)+' · Kaufkraft '+eur(x.kp)]}));
+   +'<h2>Szenarien</h2>'+tb(lastScen.map(function(x){return[x.n+', '+pf.format(x.rd-0.95)+' % nach Kosten','Endwert '+eur(x.end)+' · Kaufkraft '+eur(x.kp)]}));
   if(VARS.length)h+='<h2>Varianten</h2>'+tb(VARS.map(function(v){return[v.name,eur(v.p.B/12)+' im Monat · Einmalzahlung '+eur(v.p.lu)+' · Zulagen '+eur(v.s.zul)+' · Endwert '+eur(v.s.end)]}));
   if(lastBv){var b=lastBv;h+='<h2>Bestandsvertrag und Depot</h2>'+tb([['Anbieter und Tarif',b.anb||'–'],['Aktueller Wert',eur(b.w)],['Kosten p. a. Bestand',pf2.format(b.k)+' %'],['Wechselkosten',eur(b.x)],
      ['Endwert Bestandsvertrag',eur(b.bestand)],['Endwert Depot',eur(b.depot)],['Unterschied',(b.diff>=0?'+':'−')+eur(Math.abs(b.diff))]])}
@@ -1461,7 +1468,11 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('proto')
 $('prp').addEventListener('click',function(){$('prh').textContent='Falls kein Druckdialog erscheint, blockiert diese Vorschau das Drucken. Auf der eigenen Adresse der Seite steht es zur Verfügung.';try{window.print()}catch(x){}});
 
 /* Kundenansicht: Anfrage mit Berechnung und optionaler Maklervollmacht direkt an den Berater */
-function placeV(k){var m=document.querySelector('main'),v=$('st6');if(!v)return;
+function placeS(k){var s1=$('st1'),s2=$('st2'),box=$('sBox');
+  if(!box){box=document.createElement('div');box.id='sBox';s1.appendChild(box)}
+  if(k){var hd=s2.querySelector('header');Array.prototype.slice.call(s2.children).forEach(function(c){if(c!==hd)box.appendChild(c)});$('twoBox').appendChild($('twoEl'))}
+  else{Array.prototype.slice.call(box.children).forEach(function(c){s2.appendChild(c)});$('twoMark').parentNode.insertBefore($('twoEl'),$('twoMark').nextSibling)}}
+function placeV(k){placeS(k);var m=document.querySelector('main'),v=$('st6');if(!v)return;
   if(k){m.appendChild(v);v.classList.toggle('koff',!$('kvm').checked);$('v-tag').textContent='Optional';$('vmL').textContent='Ich erteile die Maklervollmacht mit meiner Unterschrift *'}
   else{var s7=$('st7');if(s7)m.insertBefore(v,s7);v.classList.remove('koff');$('v-tag').textContent='Bestandskunde';$('vmL').textContent='Der Kunde erteilt die Maklervollmacht mit seiner Unterschrift *'}}
 function kurz(){var p=read(),r=sim(p),f=r.first,po=payout(p,r);return['- Eigenbeitrag: '+eur(f.Bt/12)+' im Monat','- Zulagen im ersten Jahr: '+eur(f.g+f.k+f.bo),'- Zulagen über die Laufzeit: '+eur(r.zul),'- Rechnerisches Depot mit '+p.ra+': '+eur(r.end),'- Auszahlplan bis 85: etwa '+eur(po.m)+' im Monat','(Modellrechnung, keine Garantie)'].join('\n')}
