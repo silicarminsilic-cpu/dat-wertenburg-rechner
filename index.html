@@ -529,14 +529,13 @@ body.sh-open{overflow:hidden}
 
 <main>
  <section class="card rv" id="st1" aria-labelledby="h1">
-  <header><b>1</b><h2 id="h1" data-k="Ihre Angaben">Person</h2></header>
+  <header><b>1</b><h2 id="h1" data-k="Wie hoch kann Ihre Förderung (Zulage) sein?">Person</h2></header>
+  <p class="hint ko" style="margin:0 0 14px">Hierzu geben Sie ein: 1. Ihre berufliche Situation, 2. Anzahl Kinder mit Alter, 3. Ihr Alter, 4. Ihren Steuersatz, 5. Ihren Eigenbeitrag.</p>
   <div class="fields">
-   <div class="fld"><label for="by">Geburtsjahr</label><input id="by" type="number" inputmode="numeric" value="1990" min="1950" max="2010"></div>
-   <div class="fld kx"><label for="ra">Auszahlbeginn mit Alter</label><input id="ra" type="number" inputmode="numeric" value="67" min="65" max="70"></div>
+   <div class="fld"><label for="by">Geburtsjahr</label><input id="by" type="number" inputmode="numeric" value="1987" min="1950" max="2010"></div>
+   <div class="fld"><label for="ra">Auszahlbeginn mit Alter</label><input id="ra" type="number" inputmode="numeric" value="67" min="65" max="70"></div>
    <div class="fld"><label for="job">Berufliche Situation</label><select id="job"><option value="ang">Angestellt / Ausbildung (rentenversichert)</option><option value="bea">Beamtet / Richter / Soldat</option><option value="sel">Selbstständig / freiberuflich</option><option value="min">Minijob</option><option value="ne">Nicht erwerbstätig</option></select></div>
-   <div class="fld kx"><label for="fst">Förderstatus</label><select id="fst"><option value="u">Unmittelbar zulageberechtigt</option><option value="m">Mittelbar über Ehepartner (höchstens 175 €)</option><option value="n">Nicht zulageberechtigt</option></select></div>
-   <div class="fld kx"><label for="fs">Familienstand</label><select id="fs"><option>Keine Angabe</option><option>Ledig</option><option>Verheiratet / eingetragene Lebenspartnerschaft</option></select></div>
-   <div class="fld"><label for="st">Grenzsteuersatz (für Günstigerprüfung)</label><select id="st"><option value="0">Keine Angabe</option><option value="14">ca. 14 %</option><option value="24">ca. 24 %</option><option value="30" selected>ca. 30 %</option><option value="35">ca. 35 %</option><option value="42">ca. 42 %</option><option value="45">ca. 45 %</option></select></div>
+   <div class="fld"><label for="fst">Förderstatus</label><select id="fst"><option value="u">Unmittelbar zulageberechtigt</option><option value="m">Mittelbar über Ehepartner (höchstens 175 €)</option><option value="n">Nicht zulageberechtigt</option></select></div>
    <div class="fld kx"><label for="ri">Bestehender Riester-Vertrag</label><select id="ri"><option>Keine Angabe</option><option>Nein</option><option>Ja</option></select></div>
   </div>
   <div class="fields kx" id="riBox" hidden style="margin-top:18px">
@@ -547,16 +546,21 @@ body.sh-open{overflow:hidden}
   <div class="hint" id="h-job"></div>
   <h3>Kinder</h3>
   <div class="fields">
-   <div class="fld"><span class="lbl2" id="kl">Kinder mit Kindergeld</span><div class="stp"><button type="button" id="km" aria-label="Ein Kind weniger">−</button><input id="kids" type="number" inputmode="numeric" value="2" min="0" max="8" aria-labelledby="kl"><button type="button" id="kp" aria-label="Ein Kind mehr">+</button></div></div>
-   <div class="fld"><label for="kga">Kindergeld voraussichtlich bis</label><select id="kga"><option value="18">18 Jahre</option><option value="25">25 Jahre (Ausbildung, Studium)</option></select></div>
+   <div class="fld"><span class="lbl2" id="kl">Kinder mit Kindergeld</span><div class="stp"><button type="button" id="km" aria-label="Ein Kind weniger">−</button><input id="kids" type="number" inputmode="numeric" value="1" min="0" max="8" aria-labelledby="kl"><button type="button" id="kp" aria-label="Ein Kind mehr">+</button></div></div>
+   <div class="fld"><label for="kga">Kindergeld voraussichtlich bis</label><select id="kga"><option value="18">18 Jahre</option><option value="25" selected>25 Jahre (Ausbildung, Studium)</option></select></div>
   </div>
   <div class="fields three" id="kyears" style="margin-top:14px"></div>
   <div class="hint">Die Kinderzulage steht je Kind nur einem Elternteil zu und endet mit dem Kindergeld.</div>
+  <div class="fields" style="margin-top:18px">
+   <div class="fld"><label for="fs">Familienstand</label><select id="fs"><option>Keine Angabe</option><option selected>Ledig</option><option>Verheiratet / eingetragene Lebenspartnerschaft</option></select></div>
+   <div class="fld"><label for="st">Grenzsteuersatz (für Günstigerprüfung)</label><select id="st"><option value="0">Keine Angabe</option><option value="14">ca. 14 %</option><option value="24">ca. 24 %</option><option value="30">ca. 30 %</option><option value="35">ca. 35 %</option><option value="42">ca. 42 %</option><option value="45" selected>ca. 45 %</option></select></div>
+  </div>
   <div class="hint" id="h-person-msg"></div>
  </section>
 
  <section class="card rv" id="st2" aria-labelledby="h2">
   <header><b>2</b><h2 id="h2">Sparbetrag</h2></header>
+  <h3 class="ko">Sparbetrag</h3>
   <div class="fields">
    <div class="fld"><label for="b">Eigenbeitrag</label><div class="unit"><input id="b" type="number" inputmode="decimal" value="150" min="0" step="5"><i id="bu">€/Mon.</i></div></div>
    <div class="fld"><label for="per">Eingabeart</label><select id="per"><option value="m">monatlich</option><option value="y">jährlich</option></select></div>
@@ -862,7 +866,7 @@ function num(id,min,max,def){var v=parseFloat($(id).value);if(isNaN(v))v=def;ret
 /* Gesetz und Produkt: Altersvorsorgereformgesetz (BGBl. 2026 I Nr. 156), Zielmarkt laut Produktpartner */
 var P={minOwn:120,t1:360,r1:0.5,t2:1800,r2:0.25,kidMax:300,bonus:200,bonusAge:25,spouseMax:175,maxOwn:1800,maxYear:6840,sa:1800,
   payMin:65,payMax:70,payEnd:85,part:0.3,entryMin:18,entryMax:55,minTerm:10,topUpMin:250,transferMin:1000,transferFee:150};
-var KDEF=[2018,2020,2022,2015,2012,2024,2010,2026];
+var KDEF=[2022,2018,2020,2015,2012,2024,2010,2026];
 function kidYears(){var a=[];document.querySelectorAll('#kyears input').forEach(function(i){var v=parseInt(i.value,10);a.push(isNaN(v)?2018:Math.min(2040,Math.max(1990,v)))});return a}
 function renderKids(){
   var n=Math.round(num('kids',0,8,0)),box=$('kyears'),have=box.querySelectorAll('input').length;
